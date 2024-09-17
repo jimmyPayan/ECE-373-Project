@@ -10,8 +10,8 @@ Specific weather station API (tenative): https://www.weather.gov/documentation/s
 
 ### Login
 1.  User: Generic User class - this base class is assigned to everyone running the program by default
-2.  Admin: Subclass of User w/ additional perms
-3.  LoginGUI: Allows users to be assigned admin/maintenance class if they enter username + password
+2.  Admin: Subclass of User with additional permissions
+3.  LoginGUI: Allows users to be assigned admin/maintenance class if they enter username + password. Login first, then go to MainMenuGUI
 4.  Login: Checks if entered credentials are in CredentialDatabase and modifies "user" accordingly
 5.  CredentialDatabase: Holds all valid username + password combinations
 
@@ -30,7 +30,7 @@ Specific weather station API (tenative): https://www.weather.gov/documentation/s
 15. MapScale: Custom radius for weather pulling. Max of 100 miles, changeable in UserSettings.
 
 ### Weather Data
-16. WeatherDisplayGUI: Displays forecast based on info stored in WeatherData, depending on UserLocation + UserSettings + MapScale
+16. WeatherDisplayGUI: Displays forecast based on info stored in WeatherData, depending on UserLocation + UserSettings + MapScale + MapUnit
 17. WeatherAPIPuller: Pulls data from website and stores into "WeatherData" class
     - Data requester: Requests from weather database data for user
     - Data processor: Processes the response from the weather database
@@ -41,8 +41,8 @@ Specific weather station API (tenative): https://www.weather.gov/documentation/s
 ### Additional Functionality
 21. UserLocationGUI: "Allow this device to access your location?" || "Enter your location"
 22. UserLocation: Pulls location from device or UserLocationGUI
-23. SaveDataGUI: Allows user to save snapshot of weather data to their PC
-24. SaveData: Saves snapshot of weather data to user PC
+23. MapUnit: Allows users to specify miles or kilometers.
+24. WeatherInfoPanel (possibly, just call this "main"): Main class that other classes will interface with
 25. Exit: Ends the program
 
 ***********************************************************************************************************
