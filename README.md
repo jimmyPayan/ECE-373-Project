@@ -10,6 +10,8 @@ Specific weather station API (tenative): https://www.weather.gov/documentation/s
 1.  MainMenuGUI: Takes user to different actions: UserSettingsGUI, DateGUI, LoginGUI, ExitGUI
 2.  MainMenu: Carries out actions as specified by MainMenuGUI inputs
 3.  WeatherAPIPuller: Pulls data from website
+    - Data requester: Requests from weather database data for user
+    - Data processor: Processes the response from the weather database
 4.  UserLocationGUI: "Allow this device to access your location?" || "Enter your location"
 5.  UserLocation: Pulls location from device or UserLocationGUI
 6.  UserSettingsGUI: Allows user to change settings
