@@ -21,14 +21,14 @@ Specific weather station API (tenative): https://www.weather.gov/documentation/s
 12. Date: Provides "desired date" value to WeatherAPIPuller (default to current date + time)
 13. User: Generic User class - this base class is assigned to everyone running the program by default
 14. Admin: Subclass of User w/ additional perms
-15. Maintenance: Subclass of User w/ additional perms (less than Admin)
-16. LoginGUI: Allows users to be assigned admin/maintenance class if they enter username + password
-17. Login: Checks if entered credentials are in CredentialDatabase and modifies "user" accordingly
-18. CredentialDatabase: Holds all valid username + password combinations
-19. WeatherDisplayGUI: Displays forecast based on info stored in WeatherData, depending on UserLocation + UserSettings
-20. WeatherSettingsGUI: Accessible from WeatherDisplayGUI, allows user to access MainMenuGUI, DateGUI, ExitGUI
-21. ExitGUI: Allows user to end the program
-22. Exit: Ends the program
-23. SaveDataGUI: Allows user to save snapshot of weather data to their PC
-24. SaveData: Saves snapshot of weather data to user PC
-25. WeatherData: Object created by "WeatherAPIPuller"
+15. LoginGUI: Allows users to be assigned admin/maintenance class if they enter username + password
+16. Login: Checks if entered credentials are in CredentialDatabase and modifies "user" accordingly
+17. CredentialDatabase: Holds all valid username + password combinations
+18. WeatherDisplayGUI: Displays forecast based on info stored in WeatherData, depending on UserLocation + UserSettings
+19. WeatherSettingsGUI: Accessible from WeatherDisplayGUI, allows user to access MainMenuGUI, DateGUI, ExitGUI
+20. ExitGUI: Allows user to end the program
+21. Exit: Ends the program
+22. SaveDataGUI: Allows user to save snapshot of weather data to their PC
+23. SaveData: Saves snapshot of weather data to user PC
+24. WeatherData: Object created by "WeatherAPIPuller"
+25. MapScale: Custom radius for weather pulling. Max of 100 miles, changeable in UserSettings.
