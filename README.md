@@ -32,10 +32,9 @@ Specific weather station API (tenative): https://www.weather.gov/documentation/s
 
 ### Weather Data
 17. WeatherDisplayGUI: Displays forecast based on info stored in WeatherData, depending on UserLocation + UserSettings + MapScale + MapUnit
-18. WeatherAPIPuller: Pulls data from website and stores into "WeatherData" class
-    - Data requester: Requests from weather database data for user
-    - Data processor: Processes the response from the weather database
-19. WeatherData: Object created by "WeatherAPIPuller" which stores... WeatherData
+18. APIPuller: Interfaces with national weather database and pulls JSON file
+19. JSONParser: Searches WeatherData file from APIPuller and  
+19. WeatherData: Object created by "WeatherAPIPuller" which stores WeatherData
 20. TemperatureConverter: Convert F to C or C to F depending on user settings
 21. WeatherSettingsGUI: Accessible from WeatherDisplayGUI, allows user to access MainMenuGUI, DateGUI, ExitGUI
 
