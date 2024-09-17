@@ -7,7 +7,11 @@ Delete any classes you assign to yourself.
 
 ### Class assignments:
 Aayush:
+
 Ahmad:
+
 atmega382p:
+
 Jimmy: 1,2,3,4,5
+
 Ryan:
