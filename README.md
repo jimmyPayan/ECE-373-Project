@@ -27,21 +27,21 @@ Specific weather station API (tenative): https://www.weather.gov/documentation/s
 12. UserSettings: Changes settings as desired from user (C to F, Color of Dialog Boxes)
 13. ColorSettingsGUI: Allows user to change color of dialog boxes
 14. ColorSetings: Changes color of dialog boxes depending on user settings (defaults to... default color)
-15. MapScale: Custom radius for weather pulling. Max of 100 miles, changeable in UserSettings.
+15. MapScale: Custom radius for weather pulling. Max of 100 miles, changeable in UserSettings. 
+16. MapUnit: Allows users to specify miles or kilometers. (See about rolling scale and unit into one class)
 
 ### Weather Data
-16. WeatherDisplayGUI: Displays forecast based on info stored in WeatherData, depending on UserLocation + UserSettings + MapScale + MapUnit
-17. WeatherAPIPuller: Pulls data from website and stores into "WeatherData" class
+17. WeatherDisplayGUI: Displays forecast based on info stored in WeatherData, depending on UserLocation + UserSettings + MapScale + MapUnit
+18. WeatherAPIPuller: Pulls data from website and stores into "WeatherData" class
     - Data requester: Requests from weather database data for user
     - Data processor: Processes the response from the weather database
-18. WeatherData: Object created by "WeatherAPIPuller" which stores... WeatherData
-19. TemperatureConverter: Convert F to C or C to F depending on user settings
-20. WeatherSettingsGUI: Accessible from WeatherDisplayGUI, allows user to access MainMenuGUI, DateGUI, ExitGUI
+19. WeatherData: Object created by "WeatherAPIPuller" which stores... WeatherData
+20. TemperatureConverter: Convert F to C or C to F depending on user settings
+21. WeatherSettingsGUI: Accessible from WeatherDisplayGUI, allows user to access MainMenuGUI, DateGUI, ExitGUI
 
 ### Additional Functionality
-21. UserLocationGUI: "Allow this device to access your location?" || "Enter your location"
-22. UserLocation: Pulls location from device or UserLocationGUI
-23. MapUnit: Allows users to specify miles or kilometers.
+22. UserLocationGUI: "Allow this device to access your location?" || "Enter your location"
+23. UserLocation: Pulls location from device or UserLocationGUI
 24. WeatherInfoPanel (possibly, just call this "main"): Main class that other classes will interface with
 25. Exit: Ends the program
 
