@@ -8,7 +8,7 @@ Delete any classes you assign to yourself.
 ### Class assignments:
 Aayush:
 
-Ahmad:
+Ahmad: hi
 
 atmega382p:
 
