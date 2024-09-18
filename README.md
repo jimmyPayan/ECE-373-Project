@@ -12,7 +12,7 @@ Specific weather station API (tenative): https://www.weather.gov/documentation/s
 1.  User: Generic User class - this base class is assigned to everyone running the program by default
 2.  Admin: Subclass of User with additional permissions
 3.  LoginGUI: Allows users to be assigned admin/maintenance class if they enter username + password. Login first, then go to MainMenuGUI
-4.  Login: Checks if entered credentials are in CredentialDatabase and modifies "user" accordingly
+4.  Login: Carries out actions as specified by LoginGUI inputs
 5.  CredentialDatabase: Holds all valid username + password combinations
 
 ### Main Menu
@@ -43,7 +43,7 @@ Specific weather station API (tenative): https://www.weather.gov/documentation/s
 22. UserLocationGUI: "Allow this device to access your location?" || "Enter your location"
 23. UserLocation: Pulls location from device or UserLocationGUI
 24. WeatherInfoPanel (possibly, just call this "main"): Main class that other classes will interface with
-25. Exit: Ends the program
+25. Exit: Carries out actions as specified by ExitGUI inputs
 
 ***********************************************************************************************************
 
