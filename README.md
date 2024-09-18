@@ -14,6 +14,8 @@ Specific weather station API (tenative): https://www.weather.gov/documentation/s
 3.  LoginGUI: Allows users to be assigned admin/maintenance class if they enter username + password. Login first, then go to MainMenuGUI
 4.  Login: Carries out actions as specified by LoginGUI inputs
 5.  CredentialDatabase: Holds all valid username + password combinations
+6.  PasswordEncrypter: Takes the plain text and scrambles it for safe storage
+7.  PasswordDecrypter: Decrypts the Password for usage later
 
 ### Main Menu
 6.  MainMenuGUI: Takes user to different actions: UserSettingsGUI, DateGUI, LoginGUI, ExitGUI
