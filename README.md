@@ -27,14 +27,15 @@ Specific weather station API (tenative): https://www.weather.gov/documentation/s
 12. UserSettings: Changes settings as desired from user (C to F, Color of Dialog Boxes)
 13. ColorSettingsGUI: Allows user to change color of dialog boxes
 14. ColorSetings: Changes color of dialog boxes depending on user settings (defaults to... default color)
-15. MapScale: Custom radius for weather pulling. Max of 100 miles, changeable in UserSettings. 
-16. MapUnit: Allows users to specify miles or kilometers. (See about rolling scale and unit into one class)
 
 ### Weather Data
-17. WeatherDisplayGUI: Displays forecast based on info stored in WeatherData, depending on UserLocation + UserSettings + MapScale + MapUnit
+17. WeatherDisplayGUI: Displays forecast based on info stored in WeatherData, depending on UserLocation + UserSettings
 18. APIPuller: Interfaces with national weather database and pulls JSON file
 19. JSONParser: Searches WeatherData file from APIPuller and  
 19. WeatherData: Object created by "WeatherAPIPuller" which stores WeatherData
+    - Precipitation Data
+    - Temperature Data
+    - Wind Data
 20. TemperatureConverter: Convert F to C or C to F depending on user settings
 21. WeatherSettingsGUI: Accessible from WeatherDisplayGUI, allows user to access MainMenuGUI, DateGUI, ExitGUI
 
