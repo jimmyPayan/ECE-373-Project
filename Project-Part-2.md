@@ -8,7 +8,7 @@ Delete any classes you assign to yourself.
 ### Class assignments:
 Aayush:
 
-Ahmad: hi
+Ahmad: CredentialDatabase, Login, PasswordEncryptor, PasswordEncryptor, TemperatureConverter
 
 atmega382p:
 
