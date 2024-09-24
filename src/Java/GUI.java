@@ -26,4 +26,7 @@ public class GUI {
         frame.add(this.panel);
         frame.setVisible(true);
     }
+    public JButton[] getButtons() {
+        return buttons;
+    }
 }
