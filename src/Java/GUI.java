@@ -3,7 +3,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 public class GUI {
     protected static JFrame frame = new JFrame();
     protected JLabel[] labels;

@@ -1,6 +1,7 @@
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.BoxLayout;
 public class LoginGUI extends GUI {
     public LoginGUI() {
         super(null, null, null);
@@ -15,4 +16,16 @@ public class LoginGUI extends GUI {
         this.buttons = buttons;
         this.labels = labels;
     }
+    public void placeOnPanel() {
+        panel.removeAll();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        for(int i = 0; i < labels.length; i++) {
+            panel.add(this.labels[i]);
+            panel.add(this.buttons[i]);
+        }
+        buttons[0].addActionListener(e -> {
+            Login.performLogin();
+        });
+    }
+
 }
