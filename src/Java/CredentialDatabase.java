@@ -64,15 +64,15 @@ public class CredentialDatabase {
         File file = new File("credentials.txt");
         CredentialDatabase db = new CredentialDatabase(file);
 
-        db.addEntry("username1", "password1");
-        db.addEntry("username2", "password2");
+        db.addEntry("username1", Encryptor.encrypt("password1", 1));
+        db.addEntry("username2", Encryptor.encrypt("password2", 1));
 
-        System.out.println(db.inDatabase("username1", "password1"));  // true
-        System.out.println(db.inDatabase("username2", "wrongpass"));  // false
+        System.out.println(db.inDatabase("username1", Encryptor.encrypt("password1",1)));  // true
+        System.out.println(db.inDatabase("username2", Encryptor.encrypt("wrongpass", 1)));  // false
 
-        db.removeEntry("username1", "password1");
+        db.removeEntry("username1", Encryptor.encrypt("password1", 1));
 
-        System.out.println(db.inDatabase("username1", "password1"));  // false
+        System.out.println(db.inDatabase("username1", Encryptor.encrypt("password1", 1)));  // false
     }
 
 }
