@@ -10,7 +10,7 @@ Aayush:15+16, 22,23,24,25
 
 Ahmad: 4,5,6,7,21 | CredentialDatabase, Login, PasswordEncryptor, PasswordEncryptor, TemperatureConverter
 
-atmega382p:17+18+19+20+21 (weather data classes), 23, 24, 25
+atmega382p:17+18+19+20+21 (weather data classes), **works with** 23, 24, 25
 
 Jimmy: 1,2,3,12,26
 
