@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 public class MainMenuGUI extends GUI {
     public MainMenuGUI(){//JPanel panel, JLabel[] labels, JButton[] buttons) {
         super(null, null, null);
+        //this.panel.removeAll();
         JPanel panel = new JPanel();
         JButton[] buttons = new JButton[4];
         // define buttons
@@ -36,18 +37,22 @@ public class MainMenuGUI extends GUI {
         //listener events
         buttons[0].addActionListener(e -> {
             JOptionPane.showMessageDialog(panel, "to login", null, JOptionPane.INFORMATION_MESSAGE);
+            //todo frame.remove(panel); // uncomment once implemented
             MainMenu.toLogin();
         });
         buttons[1].addActionListener(e -> {
             JOptionPane.showMessageDialog(panel, "to date", null, JOptionPane.INFORMATION_MESSAGE);
+            frame.remove(panel);
             MainMenu.toDate();
         });
         buttons[2].addActionListener(e -> {
             JOptionPane.showMessageDialog(panel, "to settings", null, JOptionPane.INFORMATION_MESSAGE);
+            frame.remove(panel);
             MainMenu.toSettings();
         });
         buttons[3].addActionListener(e -> {
             JOptionPane.showMessageDialog(panel, "exit", null, JOptionPane.INFORMATION_MESSAGE);
+            //todo frame.remove(panel); // uncomment once implemented
             MainMenu.toExit();
         });
 
