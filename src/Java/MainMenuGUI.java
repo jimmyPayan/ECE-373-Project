@@ -3,10 +3,12 @@ import javax.swing.JLabel;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+
 public class MainMenuGUI extends GUI {
-    public MainMenuGUI(){//JPanel panel, JLabel[] labels, JButton[] buttons) {
+
+    public MainMenuGUI(){
         super(null, null, null);
-        //this.panel.removeAll();
+        
         JPanel panel = new JPanel();
         JButton[] buttons = new JButton[4];
         // define buttons
@@ -55,8 +57,5 @@ public class MainMenuGUI extends GUI {
             //todo frame.remove(panel); // uncomment once implemented
             MainMenu.toExit();
         });
-
     }
-
-
 }
