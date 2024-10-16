@@ -3,15 +3,15 @@ Everyone pick 5 classes to write about. Do GUIs and associated classes in pairs 
 Delete any classes you assign to yourself.
 
 ### Classes not assigned yet:
-8+9, 10+11, 13+14, 15+16, 17+18+19+20+21 (weather data classes), 22, 23, 24, 25
+
 
 ### Class assignments:
-Aayush:
+Aayush:15+16, 22,23,24,25
 
 Ahmad: 4,5,6,7,21 | CredentialDatabase, Login, PasswordEncryptor, PasswordEncryptor, TemperatureConverter
 
-atmega382p:
+atmega382p:17+18+19+20+21 (weather data classes), **works with** 23, 24, 25
 
 Jimmy: 1,2,3,12,26
 
-Ryan:
+Ryan: 8,9,10,11,13,14
