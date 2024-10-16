@@ -2,6 +2,9 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
+import javax.swing.JOptionPane;
+
+
 public class LoginGUI extends GUI {
     public LoginGUI() {
         super(null, null, null);
@@ -16,6 +19,7 @@ public class LoginGUI extends GUI {
         this.buttons = buttons;
         this.labels = labels;
     }
+    
     public void placeOnPanel() {
         panel.removeAll();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -24,8 +28,14 @@ public class LoginGUI extends GUI {
             panel.add(this.buttons[i]);
         }
         buttons[0].addActionListener(e -> {
+            JOptionPane.showMessageDialog(panel, "to login", null, JOptionPane.INFORMATION_MESSAGE);
+            frame.remove(panel);
             Login.performLogin();
         });
+        buttons[1].addActionListener(e -> {
+            JOptionPane.showMessageDialog(panel, "to main menu", null, JOptionPane.INFORMATION_MESSAGE);
+            frame.remove(panel);
+            Login.toMainMenu();
+        });
     }
-
 }
