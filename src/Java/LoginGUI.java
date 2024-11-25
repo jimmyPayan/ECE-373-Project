@@ -2,10 +2,12 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
-import javax.swing.JOptionPane;
-
-
+import javax.swing.JTextField;
 public class LoginGUI extends GUI {
+    private JTextField usernameInput = new JTextField();
+    private JTextField passwordInput = new JTextField();
+
+
     public LoginGUI() {
         super(null, null, null);
         JPanel panel = new JPanel();
@@ -28,14 +30,16 @@ public class LoginGUI extends GUI {
             panel.add(this.buttons[i]);
         }
         buttons[0].addActionListener(e -> {
-            JOptionPane.showMessageDialog(panel, "to login", null, JOptionPane.INFORMATION_MESSAGE);
-            frame.remove(panel);
-            Login.performLogin();
+            Login.performLogin(usernameInput.getText(), passwordInput.getText());
         });
-        buttons[1].addActionListener(e -> {
-            JOptionPane.showMessageDialog(panel, "to main menu", null, JOptionPane.INFORMATION_MESSAGE);
-            frame.remove(panel);
-            Login.toMainMenu();
-        });
+        panel.add(new JLabel("Password:"));
+        panel.add(this.usernameInput);
+        panel.add(new JLabel("Username:"));
+        panel.add(this.passwordInput);
+    }
+    public static void main(String[] args) {
+        LoginGUI gui = new LoginGUI();
+        gui.placeOnPanel();
+        gui.placeOnScreen();
     }
 }

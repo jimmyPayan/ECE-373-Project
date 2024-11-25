@@ -1,6 +1,8 @@
+import java.io.File;
+
 public class Login {
     private LoginGUI gui;
-    private static CredentialDatabase database;
+    private static CredentialDatabase database = new CredentialDatabase(new File("DB.txt"));
 
     // empty constructor
     public Login() {
@@ -11,12 +13,13 @@ public class Login {
     
     public Login(LoginGUI gui, CredentialDatabase database) {
         this.gui = gui;
-        this.database = database;
     } 
-
-    public static void performLogin() {
-        if(database.inDatabase("Username", Encryptor.encrypt("Password", 1))) {
+    public static void performLogin(String user, String pass) {
+        if(database.inDatabase(user, Encryptor.encrypt(pass, 1))) {
             System.out.println("Password in system, go to next GUI");
+        } else {
+            database.addEntry(user, Encryptor.encrypt(pass, 1));
+            performLogin(user, Encryptor.encrypt(pass, 1));
         }
     }
 

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class CredentialDatabase {
-    private File databaseFile;
+    private File databaseFile = new File("DB.txt");
     public CredentialDatabase(File databaseFile) {
         this.databaseFile = databaseFile;
     }
