@@ -30,11 +30,17 @@ public class LoginGUI extends GUI {
     public void placeOnPanel() {
         panel.removeAll();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        
-        
-        panel.add(this.labels[0]);
-        panel.add(this.buttons[0]);
-        
+        for(int i = 0; i < labels.length; i++) {
+            panel.add(this.labels[i]);
+            panel.add(this.buttons[i]);
+        }
+        buttons[0].addActionListener(e -> {
+            Login.performLogin(usernameInput.getText(), passwordInput.getText());
+        });
+        buttons[1].addActionListener(e -> {
+            frame.remove(panel);
+            Login.goToMain();
+        });
         panel.add(new JLabel("Username:"));
         passwordInput.setEchoChar('-');
         panel.add(this.usernameInput);

@@ -18,6 +18,9 @@ public class Login {
             System.out.println("Account does not exist");
         }
     }
-
+    public static void goToMain() {
+        System.out.println("Going to main menu");
+        MainMenu mainMenu = new MainMenu();
+    }
     
 }
