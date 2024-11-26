@@ -1,11 +1,12 @@
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
 import javax.swing.JTextField;
 public class LoginGUI extends GUI {
     private JTextField usernameInput = new JTextField();
-    private JTextField passwordInput = new JTextField();
+    private JPasswordField passwordInput = new JPasswordField();
 
 
     public LoginGUI() {
@@ -36,9 +37,11 @@ public class LoginGUI extends GUI {
         buttons[0].addActionListener(e -> {
             Login.performLogin(usernameInput.getText(), passwordInput.getText());
         });
-        panel.add(new JLabel("Password:"));
-        panel.add(this.usernameInput);
+
         panel.add(new JLabel("Username:"));
+        passwordInput.setEchoChar('-');
+        panel.add(this.usernameInput);
+        panel.add(new JLabel("Password:"));
         panel.add(this.passwordInput);
     }
     public static void main(String[] args) {
