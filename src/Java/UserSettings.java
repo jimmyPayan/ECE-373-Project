@@ -18,6 +18,7 @@ public class UserSettings {
 
     public static void toColor(){
         // implement Aayush's code later
+        ColorSettings settings = new ColorSettings();
     }
 
     public static void toMenu(){

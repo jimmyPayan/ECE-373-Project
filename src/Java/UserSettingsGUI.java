@@ -48,12 +48,14 @@ public class UserSettingsGUI extends GUI {
         panel.add(labels[2]);
         panel.add(buttons[2]);
         panel.add(buttons[1]);
+        this.panel.setBackground(GUI.panel_color);
         
         // action listeners for all buttons
         buttons[0].addActionListener(e -> {
             System.out.println("SettingsCall: color");
-            SwingUtilities.invokeLater(() -> new ColorSettingsApp());
-            ColorSettings settings = new ColorSettings();
+            //SwingUtilities.invokeLater(() -> new ColorSettingsApp());
+            frame.remove(panel);
+            UserSettings.toColor();
         });
 
         buttons[1].addActionListener(e -> {

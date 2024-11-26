@@ -3,6 +3,7 @@ import javax.swing.JLabel;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import java.awt.*;
 
 public class MainMenuGUI extends GUI {
 
@@ -25,6 +26,7 @@ public class MainMenuGUI extends GUI {
         labels[3] = new JLabel("ExitGUI label");
 
         this.panel = panel;
+        panel.setBackground(Color.BLUE);
         this.buttons = buttons;
         this.labels = labels;
     }
@@ -36,6 +38,7 @@ public class MainMenuGUI extends GUI {
             panel.add(this.labels[i]);
             panel.add(this.buttons[i]);
         }
+        
         //listener events
         buttons[0].addActionListener(e -> {
             JOptionPane.showMessageDialog(panel, "to login", null, JOptionPane.INFORMATION_MESSAGE);
@@ -48,7 +51,7 @@ public class MainMenuGUI extends GUI {
             MainMenu.toDate();
         });
         buttons[2].addActionListener(e -> {
-            JOptionPane.showMessageDialog(panel, "to settings", null, JOptionPane.INFORMATION_MESSAGE);
+           // JOptionPane.showMessageDialog(panel, "to settings", null, JOptionPane.INFORMATION_MESSAGE);
             frame.remove(panel);
             MainMenu.toSettings();
         });
