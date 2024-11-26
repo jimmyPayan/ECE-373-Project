@@ -33,7 +33,10 @@ public class LoginGUI extends GUI {
         buttons[0].addActionListener(e -> {
             Login.performLogin(usernameInput.getText(), passwordInput.getText());
         });
-
+        buttons[1].addActionListener(e -> {
+            frame.remove(panel);
+            Login.goToMain();
+        });
         panel.add(new JLabel("Username:"));
         passwordInput.setEchoChar('-');
         panel.add(this.usernameInput);
