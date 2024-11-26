@@ -28,7 +28,7 @@ public class GUI {
         this.panel.setBackground(GUI.panel_color);
     }
     public void placeOnScreen() {
-        frame.setSize(500,500);
+        frame.setSize(750,500);
         frame.add(this.panel);
         frame.setVisible(true);
         this.panel.setBackground(GUI.panel_color);

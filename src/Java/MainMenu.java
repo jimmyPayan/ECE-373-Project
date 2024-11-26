@@ -26,7 +26,7 @@ public class MainMenu {
     }
     public static void toExit(){
         System.out.println("Menu Call: Exit");
-        //TODO Implement Jimmy's code later
+        Exit exit = new Exit(); // jp test
     }
 
     // for debug

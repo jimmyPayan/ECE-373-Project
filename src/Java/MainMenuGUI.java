@@ -42,7 +42,6 @@ public class MainMenuGUI extends GUI {
         //listener events
         buttons[0].addActionListener(e -> {
             JOptionPane.showMessageDialog(panel, "to login", null, JOptionPane.INFORMATION_MESSAGE);
-            //todo frame.remove(panel); // uncomment once implemented
             frame.remove(panel);
             MainMenu.toLogin();
         });
@@ -59,6 +58,7 @@ public class MainMenuGUI extends GUI {
         buttons[3].addActionListener(e -> {
             JOptionPane.showMessageDialog(panel, "exit", null, JOptionPane.INFORMATION_MESSAGE);
             //todo frame.remove(panel); // uncomment once implemented
+            frame.remove(panel);
             MainMenu.toExit();
         });
     }
