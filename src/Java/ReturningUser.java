@@ -1,8 +1,8 @@
 public class ReturningUser extends User {
     private String password;
-    private WeatherInfo history; // This should probably be an array, but we need to discuss a bit more (after exam, probably).
+    private WeatherData[] history; // This should probably be an array, but we need to discuss a bit more (after exam, probably).
 
-    public returningUser(String name) {
+    public ReturningUser(String name) {
         super(name);
     }
 
@@ -14,11 +14,11 @@ public class ReturningUser extends User {
         this.password = password;
     }
 
-    public WeatherInfo getHistory() {
+    public WeatherData[] getHistory() {
         return this.history;
     }
 
-    public void setHistory(WeatherInfo history) {
+    public void setHistory(WeatherData[] history) {
         this.history = history;
     }
 }
