@@ -1,8 +1,8 @@
 public class ReturningUser extends User {
     private String password;
-    private WeatherInfo history; // This should probably be an array, but we need to discuss a bit more (after exam, probably).
+    private WeatherData[] history; // This should probably be an array, but we need to discuss a bit more (after exam, probably).
 
-    public returningUser(String name) {
+    public ReturningUser(String name) {
         super(name);
     }
 
