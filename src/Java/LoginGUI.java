@@ -11,12 +11,16 @@ public class LoginGUI extends GUI {
     public LoginGUI() {
         super(null, null, null);
         JPanel panel = new JPanel();
-        JButton[] buttons = new JButton[2];
-        buttons[0] = new JButton("Login");
-        buttons[1] = new JButton("Return to Main Menu");
-        JLabel[] labels = new JLabel[2];
-        labels[0] = new JLabel("Click below to login");
-        labels[1] = new JLabel("Click to return to Main Menu");
+
+        JButton[] buttons = new JButton[3];
+        buttons[0] = new JButton("Returning User");
+        buttons[1] = new JButton("Guest");
+        buttons[2] = new JButton("Main Menu");
+        JLabel[] labels = new JLabel[3];
+        labels[0] = new JLabel("Log in as Returning User");
+        labels[1] = new JLabel("Continue as Guest");
+        labels[2] = new JLabel("Return to Main Menu");
+        
         this.panel = panel;
         this.buttons = buttons;
         this.labels = labels;
