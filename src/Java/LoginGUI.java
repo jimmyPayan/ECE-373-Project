@@ -4,6 +4,9 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
 import javax.swing.JTextField;
+import javax.swing.JOptionPane;
+import java.awt.*;
+
 public class LoginGUI extends GUI {
     private JTextField usernameInput = new JTextField();
     private JPasswordField passwordInput = new JPasswordField();
@@ -34,13 +37,7 @@ public class LoginGUI extends GUI {
             panel.add(this.labels[i]);
             panel.add(this.buttons[i]);
         }
-        buttons[0].addActionListener(e -> {
-            Login.performLogin(usernameInput.getText(), passwordInput.getText());
-        });
-        buttons[1].addActionListener(e -> {
-            frame.remove(panel);
-            Login.goToMain();
-        });
+        
         panel.add(new JLabel("Username:"));
         passwordInput.setEchoChar('-');
         panel.add(this.usernameInput);
@@ -53,10 +50,27 @@ public class LoginGUI extends GUI {
         }
         
         buttons[0].addActionListener(e -> {
-            Login.performLogin(usernameInput.getText(), passwordInput.getText());
+            System.out.println("Login attempt");
+            if (Login.performLogin(usernameInput.getText(), passwordInput.getText())) {
+                frame.remove(panel);
+            // Display weather data gui
+            }
+            else {
+            JOptionPane.showMessageDialog(panel, "Incorrect username or password. Please try again.", null, JOptionPane.INFORMATION_MESSAGE);
+            }
         });
 
-        
+        buttons[1].addActionListener(e -> {
+            System.out.println("Proceed as Guest");
+            Login.proceedAsGuest();
+            frame.remove(panel);
+            // Display weather data gui
+        });
+
+        buttons[2].addActionListener(e -> {
+            frame.remove(panel);
+            Login.goToMain();
+        });
 
     }
     public static void main(String[] args) {
