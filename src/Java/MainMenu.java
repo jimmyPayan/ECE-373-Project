@@ -8,7 +8,10 @@ public class MainMenu {
         menugui.placeOnScreen(); 
     }
     public static void toLogin(){
+        LoginGUI logingui = new LoginGUI();
         System.out.println("Menu Call: Login");
+        logingui.placeOnPanel();
+        logingui.placeOnScreen();
         //TODO implement Ahmad's code later
     }
     public static void toDate(){
