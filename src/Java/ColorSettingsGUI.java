@@ -1,4 +1,7 @@
 import javax.swing.*;
+
+
+
 import java.awt.*;
 
 public class ColorSettingsGUI extends GUI {
@@ -42,11 +45,17 @@ public class ColorSettingsGUI extends GUI {
             ColorSettings.saveColor(selectedColor);
             if (selectedColor ==  "Blue"){
                 GUI.panel_color = new Color(139,133,255);
+                ColorButton.color = new Color(216, 214, 255);
                 }
-            else if (selectedColor == "Red")
+            else if (selectedColor == "Red"){
                 GUI.panel_color = new Color(255, 137, 133);
-            else if (selectedColor == "Green")
+                ColorButton.color  = new Color(255, 216, 214);
+            }
+            else if (selectedColor == "Green"){
                 GUI.panel_color = new Color(133,255,145);
+                ColorButton.color = new Color(214, 255, 218);
+
+            }
             System.out.println("Color settings saved: " + selectedColor);
             frame.remove(panel);
             ColorSettings.toUserSettings();
