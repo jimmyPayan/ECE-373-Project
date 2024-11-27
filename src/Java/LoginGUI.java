@@ -32,31 +32,46 @@ public class LoginGUI extends GUI {
     
     public void placeOnPanel() {
         panel.removeAll();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        for(int i = 0; i < labels.length; i++) {
-            panel.add(this.labels[i]);
-            panel.add(this.buttons[i]);
-        }
-        
-        panel.add(new JLabel("Username:"));
-        passwordInput.setEchoChar('-');
-        panel.add(this.usernameInput);
-        panel.add(new JLabel("Password:"));
-        panel.add(this.passwordInput);
+        panel.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        for(int i = 1; i < labels.length; i++) {
-            panel.add(this.labels[i]);
-            panel.add(this.buttons[i]);
+        // Username and password fields
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2;
+
+        panel.add(new JLabel("Username:"), gbc);
+        gbc.gridy++;
+        panel.add(usernameInput, gbc);
+        gbc.gridy++;
+        panel.add(new JLabel("Password:"), gbc);
+        gbc.gridy++;
+        passwordInput.setEchoChar('*');
+        panel.add(passwordInput, gbc);
+
+        // Buttons and labels
+        gbc.gridwidth = 1;
+        for (int i = 0; i < labels.length; i++) {
+            gbc.gridy++;
+            panel.add(labels[i], gbc);
+            gbc.gridx = 1;
+            panel.add(buttons[i], gbc);
+            gbc.gridx = 0;
         }
-        
+
+        // Button actions
         buttons[0].addActionListener(e -> {
             System.out.println("Login attempt");
-            if (Login.performLogin(usernameInput.getText(), passwordInput.getText())) {
+            if (Login.performLogin(usernameInput.getText(), new String(passwordInput.getPassword()))) {
                 frame.remove(panel);
-            // Display weather data gui
-            }
-            else {
-            JOptionPane.showMessageDialog(panel, "Incorrect username or password. Please try again.", null, JOptionPane.INFORMATION_MESSAGE);
+                // Display weather data GUI
+            } else {
+                JOptionPane.showMessageDialog(panel,
+                        "Incorrect username or password. Please try again.",
+                        "Login Failed",
+                        JOptionPane.ERROR_MESSAGE);
             }
         });
 
@@ -64,7 +79,7 @@ public class LoginGUI extends GUI {
             System.out.println("Proceed as Guest");
             Login.proceedAsGuest();
             frame.remove(panel);
-            // Display weather data gui
+            // Display weather data GUI
         });
 
         buttons[2].addActionListener(e -> {
@@ -72,7 +87,10 @@ public class LoginGUI extends GUI {
             Login.goToMain();
         });
 
+        this.panel.setBackground(new Color(245, 245, 245)); // Light gray background
     }
+
+
     public static void main(String[] args) {
         LoginGUI gui = new LoginGUI();
         gui.placeOnPanel();
