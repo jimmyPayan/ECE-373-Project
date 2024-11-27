@@ -13,8 +13,13 @@ public class MainMenuGUI extends GUI {
         buttons[1] = new JButton("");
         buttons[2] = new JButton("");
         buttons[3] = new JButton("");
+        ImageIcon[] icons = new ImageIcon[buttons.length];
+        icons[0] = new ImageIcon("../media/login.png");
+        icons[1] = new ImageIcon("../media/date.png");
+        icons[2] = new ImageIcon("../media/settings.png");
+        icons[3] = new ImageIcon("../media/exit.png");
         for (int i = 0; i < buttons.length; i++) {
-            ImageIcon icon = new ImageIcon("button" + i + ".png"); // Replace with actual image paths
+            ImageIcon icon = icons[i];
             Image img = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
             buttons[i].setIcon(new ImageIcon(img));
             buttons[i].setHorizontalTextPosition(SwingConstants.CENTER);
@@ -50,7 +55,7 @@ public class MainMenuGUI extends GUI {
         gbc.anchor = GridBagConstraints.CENTER; // Center the image
         try {
             // Load the image and resize it to 300x300 pixels
-            ImageIcon originalIcon = new ImageIcon("mainmenu.png");
+            ImageIcon originalIcon = new ImageIcon("../media/mainmenu.png");
             Image resizedImage = originalIcon.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
             ImageIcon resizedIcon = new ImageIcon(resizedImage);
             
