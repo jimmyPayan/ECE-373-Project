@@ -9,8 +9,8 @@ public class ColorSettingsGUI extends GUI {
         // Create all buttons and labels
         JPanel panel = new JPanel();
         JButton[] buttons = new JButton[2];
-        buttons[0] = new JButton("");
-        buttons[1] = new JButton("");
+        buttons[0] = new ColorButton("");
+        buttons[1] = new ColorButton("");
 
         ImageIcon[] icons = new ImageIcon[buttons.length];
         icons[0] = new ImageIcon("../media/save-regular.png");
@@ -26,7 +26,7 @@ public class ColorSettingsGUI extends GUI {
         JLabel[] labels = new JLabel[3];
         labels[0] = new JLabel("Choose Color", SwingConstants.RIGHT);
         labels[1] = new JLabel("Save", SwingConstants.RIGHT);
-        labels[2] = new JLabel("Cancel", SwingConstants.RIGHT);
+        labels[2] = new JLabel("Back", SwingConstants.RIGHT);
 
         this.panel = panel;
         this.buttons = buttons;
@@ -66,7 +66,7 @@ public class ColorSettingsGUI extends GUI {
         gbc.gridy++;
 
         // Create color picker ComboBox
-        String[] colorOptions = {"Default", "Red", "Green", "Blue"};
+        String[] colorOptions = {"Default", "Red", "Green", "Blue", "Pink", "Yellow", "Purp", "Orange"};
         JComboBox<String> colorPicker = new JComboBox<>(colorOptions);
         colorPicker.setSelectedItem(ColorSettings.selectedColor);
         colorPicker.setMaximumSize(new Dimension(150, 30));
@@ -116,7 +116,22 @@ public class ColorSettingsGUI extends GUI {
             else if (selectedColor == "Green"){
                 GUI.panel_color = new Color(133,255,145);
                 ColorButton.color = new Color(214, 255, 218);
-
+            }
+            else if (selectedColor == "Pink"){// cause why tf not?
+                GUI.panel_color = new Color(255, 158, 224);
+                ColorButton.color = new Color(255, 224, 245);
+            }
+            else if (selectedColor == "Yellow"){// cause why tf not?
+                GUI.panel_color = new Color(235, 255, 82);
+                ColorButton.color = new Color(247, 255, 189);
+            }
+            else if (selectedColor == "Purp"){// cause why tf not?
+                GUI.panel_color = new Color(192, 133, 255);
+                ColorButton.color = new Color(229, 204, 255);
+            }
+            else if (selectedColor == "Orange"){// cause why tf not?
+                GUI.panel_color = new Color(255, 181, 61);
+                ColorButton.color = new Color(255, 212, 143);
             }
             System.out.println("Color settings saved: " + selectedColor);
             frame.remove(panel);

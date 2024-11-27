@@ -1,15 +1,5 @@
 import javax.swing.*;
-
-
-
-//import Java.ColorButton;
-
 import java.awt.*;
-
-
-
-
-
 
 public class UserSettingsGUI extends GUI {
     
