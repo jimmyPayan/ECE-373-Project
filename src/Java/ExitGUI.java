@@ -65,7 +65,7 @@ public class ExitGUI extends GUI {
         });
 
         buttons[1].addActionListener(e -> {
-            JOptionPane.showMessageDialog(panel, "Returning to Main Menu.", "Main Menu", JOptionPane.INFORMATION_MESSAGE);
+            //JOptionPane.showMessageDialog(panel, "Returning to Main Menu.", "Main Menu", JOptionPane.INFORMATION_MESSAGE);
             frame.remove(panel);
             Exit.toMainMenu();
         });

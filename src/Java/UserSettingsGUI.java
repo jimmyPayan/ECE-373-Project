@@ -122,6 +122,7 @@ public class UserSettingsGUI extends GUI {
         
         // action listeners for all buttons
         buttons[1].addActionListener(e -> {
+            UserSettings.degree = degree_list[degree_sel.getSelectedIndex()];
             System.out.println("SettingsCall: color");
             //SwingUtilities.invokeLater(() -> new ColorSettingsApp());
             frame.remove(panel);
@@ -136,6 +137,7 @@ public class UserSettingsGUI extends GUI {
         });
 
         buttons[0].addActionListener(e -> {
+            UserSettings.degree = degree_list[degree_sel.getSelectedIndex()];
             System.out.println("SettingsCall: location");
             // go to location settings ui
         });

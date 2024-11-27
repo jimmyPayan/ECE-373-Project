@@ -89,12 +89,12 @@ public class MainMenuGUI extends GUI {
 
         // Listener events for each button
         buttons[0].addActionListener(e -> {
-            JOptionPane.showMessageDialog(panel, "Navigating to LoginGUI", "Info", JOptionPane.INFORMATION_MESSAGE);
+            //JOptionPane.showMessageDialog(panel, "Navigating to LoginGUI", "Info", JOptionPane.INFORMATION_MESSAGE);
             frame.remove(panel);
             MainMenu.toLogin();
         });
         buttons[1].addActionListener(e -> {
-            JOptionPane.showMessageDialog(panel, "Navigating to DateGUI", "Info", JOptionPane.INFORMATION_MESSAGE);
+            //JOptionPane.showMessageDialog(panel, "Navigating to DateGUI", "Info", JOptionPane.INFORMATION_MESSAGE);
             frame.remove(panel);
             MainMenu.toDate();
         });
@@ -103,7 +103,7 @@ public class MainMenuGUI extends GUI {
             MainMenu.toSettings();
         });
         buttons[3].addActionListener(e -> {
-            JOptionPane.showMessageDialog(panel, "Exiting application", "Info", JOptionPane.INFORMATION_MESSAGE);
+            //JOptionPane.showMessageDialog(panel, "Exiting application", "Info", JOptionPane.INFORMATION_MESSAGE);
             frame.remove(panel);
             MainMenu.toExit();
         });
