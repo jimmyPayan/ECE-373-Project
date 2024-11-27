@@ -9,10 +9,10 @@ public class MainMenuGUI extends GUI {
         JPanel panel = new JPanel();
         JButton[] buttons = new JButton[4];
         // Define buttons
-        buttons[0] = new JButton("");
-        buttons[1] = new JButton("");
-        buttons[2] = new JButton("");
-        buttons[3] = new JButton("");
+        buttons[0] = new ColorButton("");
+        buttons[1] = new ColorButton("");
+        buttons[2] = new ColorButton("");
+        buttons[3] = new ColorButton("");
         ImageIcon[] icons = new ImageIcon[buttons.length];
         icons[0] = new ImageIcon("../media/login.png");
         icons[1] = new ImageIcon("../media/date.png");

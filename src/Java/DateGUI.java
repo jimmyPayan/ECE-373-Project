@@ -34,9 +34,9 @@ public class DateGUI extends GUI {
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
         // text fields for days and time
-        JTextField daysForward = new JTextField();
+        JTextField daysForward = new JTextField("Is this needed anymore?");
         daysForward.setPreferredSize(new Dimension(200, 40));
-        JTextField timehour = new JTextField();
+        JTextField timehour = new JTextField("I dont think so");
         timehour.setPreferredSize(new Dimension(200, 40));
 
         // add to panel
