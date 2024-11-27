@@ -1,65 +1,117 @@
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 import java.awt.*;
 
 public class MainMenuGUI extends GUI {
 
-    public MainMenuGUI(){
+    public MainMenuGUI() {
         super(null, null, null);
-        
+
         JPanel panel = new JPanel();
         JButton[] buttons = new JButton[4];
-        // define buttons
-        buttons[0] = new JButton("LoginGUI");
-        buttons[1] = new JButton("DateGUI");
-        buttons[2] = new JButton("UserSettingsGUI");
-        buttons[3] = new JButton("ExitGUI");
+        // Define buttons
+        buttons[0] = new JButton("");
+        buttons[1] = new JButton("");
+        buttons[2] = new JButton("");
+        buttons[3] = new JButton("");
+        ImageIcon[] icons = new ImageIcon[buttons.length];
+        icons[0] = new ImageIcon("../media/login.png");
+        icons[1] = new ImageIcon("../media/date.png");
+        icons[2] = new ImageIcon("../media/settings.png");
+        icons[3] = new ImageIcon("../media/exit.png");
+        for (int i = 0; i < buttons.length; i++) {
+            ImageIcon icon = icons[i];
+            Image img = icon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH);
+            buttons[i].setIcon(new ImageIcon(img));
+            buttons[i].setHorizontalTextPosition(SwingConstants.CENTER);
+            buttons[i].setVerticalTextPosition(SwingConstants.BOTTOM);
+        }        
 
         JLabel[] labels = new JLabel[4];
-        // define labels
-        labels[0] = new JLabel("LoginGUI label");
-        labels[1] = new JLabel("DateGUI label");
-        labels[2] = new JLabel("UserSettingsGUI label");
-        labels[3] = new JLabel("ExitGUI label");
+        // Define labels with right alignment
+        labels[0] = new JLabel("Proceed to Login", SwingConstants.RIGHT);
+        labels[1] = new JLabel("Enter today's Date", SwingConstants.RIGHT);
+        labels[2] = new JLabel("Settings", SwingConstants.RIGHT);
+        labels[3] = new JLabel("Exit", SwingConstants.RIGHT);
 
         this.panel = panel;
-        panel.setBackground(Color.BLUE);
+        panel.setBackground(new Color(70, 130, 180)); // Steel Blue background
         this.buttons = buttons;
         this.labels = labels;
     }
 
+    @Override
     public void placeOnPanel() {
         panel.removeAll();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        for(int i = 0; i < labels.length; i++){
-            panel.add(this.labels[i]);
-            panel.add(this.buttons[i]);
+        panel.setLayout(new GridBagLayout()); // Use GridBagLayout for alignment
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10); // Spacing between components
+        gbc.fill = GridBagConstraints.HORIZONTAL; // Stretch components horizontally
+        gbc.weightx = 1.0; // Allow buttons/labels to stretch
+
+        // Add the resized image to the top of the panel
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.gridwidth = 2; // Span across both columns
+        gbc.anchor = GridBagConstraints.CENTER; // Center the image
+        try {
+            // Load the image and resize it to 300x300 pixels
+            ImageIcon originalIcon = new ImageIcon("../media/mainmenu.png");
+            Image resizedImage = originalIcon.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+            ImageIcon resizedIcon = new ImageIcon(resizedImage);
+            
+            JLabel imageLabel = new JLabel(resizedIcon);
+            panel.add(imageLabel, gbc);
+        } catch (Exception e) {
+            JLabel errorLabel = new JLabel("Image not found", SwingConstants.CENTER);
+            errorLabel.setForeground(Color.RED);
+            panel.add(errorLabel, gbc);
         }
-        
-        //listener events
+
+        // Reset grid width for labels and buttons
+        gbc.gridwidth = 1;
+        gbc.anchor = GridBagConstraints.WEST; // Left-align subsequent components
+        gbc.gridy++;
+
+        // Add labels and buttons
+        for (int i = 0; i < labels.length; i++) {
+            // Add labels (right-aligned)
+            gbc.gridx = 0; // First column
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            panel.add(this.labels[i], gbc);
+
+            // Add buttons
+            gbc.gridx = 1; // Second column
+            gbc.fill = GridBagConstraints.NONE;
+            panel.add(this.buttons[i], gbc);
+
+            gbc.gridy++; // Move to the next row
+        }
+
+        // Listener events for each button
         buttons[0].addActionListener(e -> {
-            JOptionPane.showMessageDialog(panel, "to login", null, JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(panel, "Navigating to LoginGUI", "Info", JOptionPane.INFORMATION_MESSAGE);
             frame.remove(panel);
             MainMenu.toLogin();
         });
         buttons[1].addActionListener(e -> {
-            JOptionPane.showMessageDialog(panel, "to date", null, JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(panel, "Navigating to DateGUI", "Info", JOptionPane.INFORMATION_MESSAGE);
             frame.remove(panel);
             MainMenu.toDate();
         });
         buttons[2].addActionListener(e -> {
-           // JOptionPane.showMessageDialog(panel, "to settings", null, JOptionPane.INFORMATION_MESSAGE);
             frame.remove(panel);
             MainMenu.toSettings();
         });
         buttons[3].addActionListener(e -> {
-            JOptionPane.showMessageDialog(panel, "exit", null, JOptionPane.INFORMATION_MESSAGE);
-            //todo frame.remove(panel); // uncomment once implemented
+            JOptionPane.showMessageDialog(panel, "Exiting application", "Info", JOptionPane.INFORMATION_MESSAGE);
             frame.remove(panel);
             MainMenu.toExit();
         });
+    }
+
+    public static void main(String[] args) {
+        MainMenuGUI gui = new MainMenuGUI();
+        gui.placeOnPanel();
+        gui.placeOnScreen();
     }
 }
