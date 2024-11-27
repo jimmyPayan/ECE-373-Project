@@ -1,101 +1,127 @@
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+import javax.swing.*;
+import java.awt.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.awt.Dimension;
-
-
 
 public class DateGUI extends GUI {
-    public DateGUI(){//JPanel panel, JLabel[] labels, JButton[] buttons) {
+    public DateGUI() {
         super(null, null, null);
-        JPanel panel = new JPanel();
-        JButton[] buttons = new JButton[1];
-        // define button/s
-        buttons[0] = new JButton("finish");
 
-
-        JLabel[] labels = new JLabel[3];
-        // define labels
-        labels[0] = new JLabel("Forecast days ahead (max 6)");
-        labels[1] = new JLabel("Current Time (24hr, HH:MM)");
-
+        // Set up the main panel
+        JPanel panel = new JPanel(new GridBagLayout());
         this.panel = panel;
+
+        // Define buttons
+        JButton[] buttons = new JButton[1];
+        buttons[0] = new JButton("Finish");
         this.buttons = buttons;
+
+        // Define labels
+        JLabel[] labels = new JLabel[2];
+        labels[0] = new JLabel("Forecast days ahead (max 6):");
+        labels[1] = new JLabel("Current Time (24hr, HH:MM):");
+
+        // Set label styles
+        Font labelFont = new Font("SansSerif", Font.BOLD, 14);
+        for (JLabel label : labels) {
+            label.setFont(labelFont);
+            label.setHorizontalAlignment(SwingConstants.LEFT); // Align labels to the left
+        }
         this.labels = labels;
     }
 
     public void placeOnPanel() {
         panel.removeAll();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-        // text fields for days and time
-        JTextField daysForward = new JTextField("Is this needed anymore?");
-        daysForward.setPreferredSize(new Dimension(200, 40));
-        JTextField timehour = new JTextField("I dont think so");
-        timehour.setPreferredSize(new Dimension(200, 40));
+        // Define input fields for days and time
+        JTextField daysForward = new JTextField();
+        daysForward.setPreferredSize(new Dimension(200, 30));
+        daysForward.setToolTipText("Enter a number from 0 to 6");
 
-        // add to panel
-        panel.add(labels[0]);
-        panel.add(daysForward);
-        panel.add(labels[1]);
-        panel.add(timehour);
-        panel.add(buttons[0]);
+        JTextField timeHour = new JTextField();
+        timeHour.setPreferredSize(new Dimension(200, 30));
+        timeHour.setToolTipText("Enter time in HH:MM (24-hour format)");
 
-        // listener for finish button
+        // Customize button appearance
+        buttons[0].setFont(new Font("SansSerif", Font.PLAIN, 16));
+        buttons[0].setBackground(new Color(173, 216, 230)); // Light blue background
+        buttons[0].setBorder(BorderFactory.createLineBorder(new Color(100, 149, 237))); // Blue border
+        buttons[0].setFocusPainted(false);
+
+        // Set up layout with constraints
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10); // Padding between components
+        gbc.fill = GridBagConstraints.HORIZONTAL; // Stretch components horizontally
+        gbc.gridx = 0; // Column index
+        gbc.weightx = 1.0; // Equal horizontal space distribution
+
+        // Add components to the panel
+        gbc.gridy = 0; // Row index
+        panel.add(labels[0], gbc);
+
+        gbc.gridy = 1;
+        panel.add(daysForward, gbc);
+
+        gbc.gridy = 2;
+        panel.add(labels[1], gbc);
+
+        gbc.gridy = 3;
+        panel.add(timeHour, gbc);
+
+        gbc.gridy = 4;
+        panel.add(buttons[0], gbc);
+
+        // Add button listener
         buttons[0].addActionListener(e -> {
-            processData(daysForward.getText(), timehour.getText());
+            processData(daysForward.getText().trim(), timeHour.getText().trim());
         });
 
+        // Customize panel appearance
+        panel.setBackground(new Color(245, 245, 245)); // Light gray background
+        panel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(105, 105, 105), 2), // Dark gray outer border
+                BorderFactory.createEmptyBorder(20, 20, 20, 20) // Internal padding
+        ));
     }
 
-    private int processData(String days, String hour){
-        // does input/format checking exits this function if data is incorrect
-        // if data is correct, will return data to backend class
+    private int processData(String days, String hour) {
+        // Validate and process input data
+        Pattern daysPattern = Pattern.compile("(?<!\\-)([0-6]{1})");
+        Matcher daysMatcher = daysPattern.matcher(days);
 
-        // regex for number of days
-        Pattern pattern = Pattern.compile("(?<!\\-)([0-6]{1})");
-        Matcher matcher = pattern.matcher(days);
-        if (days == "") days = "0";
-        else if(!matcher.find()){
-            JOptionPane.showMessageDialog(panel, "bad number of days entered", null, 0);
+        if (days.isEmpty()) {
+            days = "0";
+        } else if (!daysMatcher.matches()) {
+            JOptionPane.showMessageDialog(panel, "Invalid number of days. Enter a number between 0 and 6.", "Input Error", JOptionPane.ERROR_MESSAGE);
             return -1;
         }
-        days = matcher.group(1);
-        // emergency fallback, these shouldn't run
-        if(Integer.valueOf(days) > 6) days = "6";
-        if(Integer.valueOf(days) < 0) days = "0";
 
-        // regex for time
-        pattern = Pattern.compile("(?<!\\s)([0-9]{2}):([0-9]{2})");
-        matcher = pattern.matcher(hour);
-        if(!matcher.find()){
-            JOptionPane.showMessageDialog(panel, "bad time entered", null, 0);
+        days = daysMatcher.group(1);
+
+        // Validate time input
+        Pattern timePattern = Pattern.compile("(?<!\\s)([0-9]{2}):([0-9]{2})");
+        Matcher timeMatcher = timePattern.matcher(hour);
+
+        if (!timeMatcher.matches()) {
+            JOptionPane.showMessageDialog(panel, "Invalid time format. Use HH:MM in 24-hour format.", "Input Error", JOptionPane.ERROR_MESSAGE);
             return -1;
         }
-        hour = matcher.group(1);
-        // closest match for time, if oob
-        if(Integer.valueOf(hour) > 24) hour = "24";
-        if(Integer.valueOf(hour) < 0) hour = "0";
-        if(Integer.valueOf(matcher.group(2)) >= 30) hour = String.valueOf(Integer.valueOf(hour) + 1);
-        hour = (hour == "25") ? "24": hour;
-        DateTime.getData(days, hour);
 
+        int parsedHour = Integer.parseInt(timeMatcher.group(1));
+        int parsedMinute = Integer.parseInt(timeMatcher.group(2));
+
+        // Adjust hour based on minutes
+        if (parsedHour > 24) parsedHour = 24;
+        if (parsedHour < 0) parsedHour = 0;
+        if (parsedMinute >= 30) parsedHour++;
+        if (parsedHour > 24) parsedHour = 24;
+
+        DateTime.getData(days, String.valueOf(parsedHour));
+
+        // Switch to the main menu
         frame.remove(panel);
-        MainMenu menu = new MainMenu();
+        new MainMenu();
 
         return 0;
     }
-
-    //public static void main(String Args[]){
-    //    DateGUI dategui = new DateGUI();
-    //    dategui.placeOnPanel();
-    //    dategui.placeOnScreen();
-    //}
-
-
 }
