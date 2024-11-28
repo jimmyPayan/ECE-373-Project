@@ -8,13 +8,33 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 public class WeeklyWeatherForecast {
+    private static JSONArray periods;
     public static void main(String[] args) {
-        try {
-            // Get user input for latitude and longitude
-            String latitude = JOptionPane.showInputDialog("Enter latitude:");
-            String longitude = JOptionPane.showInputDialog("Enter longitude:");
+        // Get user input for latitude and longitude
+        String latitude = JOptionPane.showInputDialog("Enter latitude:");
+        String longitude = JOptionPane.showInputDialog("Enter longitude:");
 
-            // Step 1: Get the base weather API URL
+        updatePeriods(latitude, longitude);
+        // Step 1: Get the base weather API URL
+        WeatherData[] allPointsForNextFiveDays = new WeatherData[120];
+        for(int i = 0; i < allPointsForNextFiveDays.length; i++) {
+            allPointsForNextFiveDays[i] = getOneDataPoint(i, latitude, longitude);
+        }
+
+        double totalTemp = 0;
+        double totalPrecipitation = 0;
+        double totalWindSpeed = 0;
+
+        for (WeatherData weatherData : allPointsForNextFiveDays) {
+            totalTemp += weatherData.getTemperature();
+            totalPrecipitation += weatherData.getPrecipitation();
+            totalWindSpeed += weatherData.getWindSpeed(); 
+        }
+        System.out.println("Data for the next 5 days: \nPrecipiatation " + totalPrecipitation/168 + "\nTemperature "+totalTemp/168 + "\nWindSpeed " + totalWindSpeed/168 );
+    }
+
+    public static void updatePeriods(String latitude, String longitude) {
+        try {
             String apiUrl = "https://api.weather.gov/points/" + latitude + "," + longitude;
             JSONObject baseResponse = getJsonFromUrl(apiUrl);
 
@@ -23,51 +43,47 @@ public class WeeklyWeatherForecast {
 
             // Step 3: Fetch and parse the hourly forecast
             JSONObject hourlyResponse = getJsonFromUrl(hourlyUrl);
-            JSONArray periods = (JSONArray) ((JSONObject) hourlyResponse.get("properties")).get("periods");
+            periods = (JSONArray) ((JSONObject) hourlyResponse.get("properties")).get("periods");
+        } catch (Exception e) {
+            System.out.println("Something went wrong " + e.toString());
+            return;
+        }
+        
+    }
 
-            // Step 4: Calculate weekly averages
-            int hoursToProcess = Math.min(periods.size(), 168); // Limit to 7 days (168 hours)
+    public static WeatherData getOneDataPoint(int hourOffset, String latitude, String longitude) {
+        try {
+            // Step 1: Get the base weather API URL
+            
             double totalTemperature = 0;
             double totalPrecipitation = 0;
             double totalWindSpeed = 0;
-            int validDataPoints = 0;
 
-            for (int i = 0; i < hoursToProcess; i++) {
-                JSONObject forecast = (JSONObject) periods.get(i);
-                
-                // Temperature
-                double temperature = ((Number) forecast.get("temperature")).doubleValue();
-                totalTemperature += temperature;
+            
+            JSONObject forecast = (JSONObject) periods.get(hourOffset);
+            
+            // Temperature
+            double temperature = ((Number) forecast.get("temperature")).doubleValue();
+            totalTemperature += temperature;
 
-                // Probability of Precipitation
-                Object precipObj = forecast.get("probabilityOfPrecipitation");
-                double probabilityOfPrecipitation = precipObj == null ? 0
-                        : ((Number) ((JSONObject) precipObj).get("value")).doubleValue();
-                totalPrecipitation += probabilityOfPrecipitation;
+            // Probability of Precipitation
+            Object precipObj = forecast.get("probabilityOfPrecipitation");
+            double probabilityOfPrecipitation = precipObj == null ? 0
+                    : ((Number) ((JSONObject) precipObj).get("value")).doubleValue();
+            totalPrecipitation += probabilityOfPrecipitation;
 
-                // Wind Speed (convert from string to double)
-                String windSpeedStr = (String) forecast.get("windSpeed");
-                double windSpeed = parseWindSpeed(windSpeedStr);
-                totalWindSpeed += windSpeed;
-
-                validDataPoints++;
-            }
-
-            // Compute averages
-            double avgTemperature = totalTemperature / validDataPoints;
-            double avgPrecipitation = totalPrecipitation / validDataPoints;
-            double avgWindSpeed = totalWindSpeed / validDataPoints;
-
-            // Step 5: Display the results
-            String result = String.format(
-                "Weekly Averages:\nTemperature: %.1f°F\nProbability of Precipitation: %.1f%%\nWind Speed: %.1f mph",
-                avgTemperature, avgPrecipitation, avgWindSpeed);
-            JOptionPane.showMessageDialog(null, result);
-
+            // Wind Speed (convert from string to double)
+            String windSpeedStr = (String) forecast.get("windSpeed");
+            double windSpeed = parseWindSpeed(windSpeedStr);
+            totalWindSpeed += windSpeed;
+        
+            return new WeatherData(totalPrecipitation, totalTemperature, totalWindSpeed);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "An error occurred: " + e.getMessage());
+            System.out.println("Something went wrong " + e.toString());
+            return null;
         }
     }
+
 
     // Helper method to fetch and parse JSON from a URL
     private static JSONObject getJsonFromUrl(String urlString) throws Exception {

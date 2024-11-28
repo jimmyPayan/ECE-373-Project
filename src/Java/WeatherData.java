@@ -2,7 +2,13 @@
 public class WeatherData {
     private double precipitation; // Stores precipitation data
     private double temperature;    // Stores temperature data
-    private String windSpeed;      // Stores wind speed data
+    private double windSpeed;      // Stores wind speed data
+
+    public WeatherData(double precipitation, double temperature, double windSpeed) {
+        this.precipitation = precipitation;
+        this.temperature = temperature;
+        this.windSpeed = windSpeed;
+    }
 
     // Getters and Setters for each data field
     public double getPrecipitation() {
@@ -21,11 +27,11 @@ public class WeatherData {
         this.temperature = temperature;
     }
 
-    public String getWindSpeed() {
+    public double getWindSpeed() {
         return windSpeed;
     }
 
-    public void setWindSpeed(String windSpeed) {
+    public void setWindSpeed(double windSpeed) {
         this.windSpeed = windSpeed;
     }
 }
