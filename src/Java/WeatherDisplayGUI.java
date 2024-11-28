@@ -1,86 +1,69 @@
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import javax.swing.JFrame;
 
 public class WeatherDisplayGUI extends GUI {
-    // Jimmy: Not done!!!
-    public WeatherDisplayGUI() {
+    private WeatherData[] weatherDataArray;
+
+    public WeatherDisplayGUI(WeatherData[] weatherDataArray) {
         super(null, null, null);
-
-        JPanel panel = new JPanel();
-        JButton[] buttons = new JButton[9];
-        JLabel[] labels = new JLabel[9];
         
-        // Days of the week should be larger buttons which display horizontally
-        buttons[0]= new JButton("Sunday");
-        buttons[1]= new JButton("Monday");
-        buttons[2]= new JButton("Tuesday");
-        buttons[3]= new JButton("Wednesday");
-        buttons[4]= new JButton("Thursday");
-        buttons[5]= new JButton("Friday");
-        buttons[6]= new JButton("Saturday");
+        this.weatherDataArray = weatherDataArray;
 
-        // Exit/Main Menu should be located in top right.
-        buttons[7]= new JButton("Exit");
-        buttons[8]= new JButton("Main Menu");
-
-        labels[0] = new JLabel("Sunday forecast");
-        labels[1] = new JLabel("Monday forecast");
-        labels[2] = new JLabel("Tuesday forecast");
-        labels[3] = new JLabel("Wednesday forecast");
-        labels[4] = new JLabel("Thursday forecast");
-        labels[5] = new JLabel("Friday forecast");
-        labels[6] = new JLabel("Saturday forecast");
-        
-        labels[7] = new JLabel("Quit Program");
-        labels[8] = new JLabel("Return to Main Menu");
-
+        // Set up main panel
+        JPanel panel = new JPanel(new BorderLayout());
         this.panel = panel;
-        this.buttons = buttons;
-        this.labels = labels;
+
+        // Table setup
+        String[] columnNames = {"Day", "Precipitation (%)", "Temperature (°C)", "Wind Speed (km/h)"};
+        DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0);
+
+        // Fill table with data
+        for (int i = 0; i < weatherDataArray.length; i++) {
+            WeatherData data = weatherDataArray[i];
+            String[] row = {
+                "Day " + (i + 1),
+                String.format("%.1f", data.getPrecipitation()),
+                String.format("%.1f", data.getTemperature()),
+                String.format("%.1f", data.getWindSpeed())
+            };
+            tableModel.addRow(row);
+        }
+
+        JTable weatherTable = new JTable(tableModel);
+        weatherTable.setEnabled(false); // Make the table non-editable
+        weatherTable.setRowHeight(30);
+        weatherTable.getTableHeader().setFont(new Font("SansSerif", Font.BOLD, 14));
+        weatherTable.setFont(new Font("SansSerif", Font.PLAIN, 14));
+
+        JScrollPane scrollPane = new JScrollPane(weatherTable);
+
+        // Title label
+        JLabel titleLabel = new JLabel("5-Day Weather Forecast");
+        titleLabel.setFont(new Font("SansSerif", Font.BOLD, 18));
+        titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 10, 0));
+
+        // Add components to panel
+        panel.add(titleLabel, BorderLayout.NORTH);
+        panel.add(scrollPane, BorderLayout.CENTER);
+
+        // Back button
+        JButton backButton = new JButton("Back to Main Menu");
+        backButton.setFont(new Font("SansSerif", Font.PLAIN, 16));
+        backButton.addActionListener(e -> {
+            frame.remove(panel);
+            new MainMenu();
+        });
+
+        panel.add(backButton, BorderLayout.SOUTH);
+
+        // Style panel
+        panel.setBackground(new Color(245, 245, 245));
+        panel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
     }
 
     public void placeOnPanel() {
-        panel.removeAll();
-        panel.setLayout(new GridBagLayout());
-
-        GridBagConstraints a = new GridBagConstraints();
-        // Begin w/ days of the week; start at middle left and move over gradually
-        a.anchor = GridBagConstraints.LINE_START;
-        a.fill = GridBagConstraints.HORIZONTAL;
-        a.gridx = 0;
-        a.gridy = 1;
-        a.weightx = 1;
-        a.weighty = 1;
-        a.gridwidth = 2;
-        //a.insets = new Insets(5,5,0,0);
-        a.ipady = 200; // todo: Change once there's more to add to the button!
-
-        // display the days of the week :)
-        for(int i = 0 ; i < 7 ; i++) {
-        panel.add(this.buttons[i], a);
-        a.gridx = a.gridx + 2;
-        }
-
-        // Top right corner for exit
-        a.anchor = GridBagConstraints.FIRST_LINE_START;
-        a.weightx = 0;
-        a.gridx = 12;
-        a.gridy = 0;
-        a.ipady = 0;
-        a.insets = new Insets(0,0,0,0);
-
-        //panel.add(this.labels[7]);
-        panel.add(this.buttons[7], a);
-
-        a.gridx = 10;
-        panel.add(this.buttons[8], a);
+        frame.add(panel);
     }
-
-    public static void main(String Args[]) {
-        WeatherDisplay weatherDisplay = new WeatherDisplay();
-    }
-
 }

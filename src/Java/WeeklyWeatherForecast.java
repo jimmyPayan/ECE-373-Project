@@ -18,21 +18,45 @@ public class WeeklyWeatherForecast {
         // Step 1: Get the base weather API URL
         WeatherData[] allPointsForNextFiveDays = new WeatherData[120];
         for(int i = 0; i < allPointsForNextFiveDays.length; i++) {
-            allPointsForNextFiveDays[i] = getOneDataPoint(i, latitude, longitude);
+            allPointsForNextFiveDays[i] = getOneDataPoint(i);
         }
 
-        double totalTemp = 0;
-        double totalPrecipitation = 0;
-        double totalWindSpeed = 0;
+        double[] totalTemp = {0,0,0,0,0};
+        double[] totalPrecipitation = {0,0,0,0,0};
+        double[] totalWindSpeed = {0,0,0,0,0};
 
-        for (WeatherData weatherData : allPointsForNextFiveDays) {
-            totalTemp += weatherData.getTemperature();
-            totalPrecipitation += weatherData.getPrecipitation();
-            totalWindSpeed += weatherData.getWindSpeed(); 
+        for (int i = 0; i < allPointsForNextFiveDays.length; i++) {
+            totalTemp[i/24] += allPointsForNextFiveDays[i].getTemperature();
+            totalPrecipitation[i/24] += allPointsForNextFiveDays[i].getPrecipitation();
+            totalWindSpeed[i/24] += allPointsForNextFiveDays[i].getWindSpeed(); 
         }
-        System.out.println("Data for the next 5 days: \nPrecipiatation " + totalPrecipitation/168 + "\nTemperature "+totalTemp/168 + "\nWindSpeed " + totalWindSpeed/168 );
+        for (int i = 0; i < totalWindSpeed.length; i++) {
+            System.out.println("Data for the next 5 days: \nPrecipiatation " + totalPrecipitation[i]/24 + "\nTemperature "+totalTemp[i]/24 + "\nWindSpeed " + totalWindSpeed[i]/24 );
+        }
+        
     }
+    public static WeatherData[] getNextFiveDaysWeatherData() {
+        WeatherData[] allPointsForNextFiveDays = new WeatherData[120];
+        for(int i = 0; i < allPointsForNextFiveDays.length; i++) {
+            allPointsForNextFiveDays[i] = getOneDataPoint(i);
+        }
 
+        double[] totalTemp = {0,0,0,0,0};
+        double[] totalPrecipitation = {0,0,0,0,0};
+        double[] totalWindSpeed = {0,0,0,0,0};
+
+        for (int i = 0; i < allPointsForNextFiveDays.length; i++) {
+            totalTemp[i/24] += allPointsForNextFiveDays[i].getTemperature();
+            totalPrecipitation[i/24] += allPointsForNextFiveDays[i].getPrecipitation();
+            totalWindSpeed[i/24] += allPointsForNextFiveDays[i].getWindSpeed(); 
+        }
+
+        WeatherData[] next5Days = new WeatherData[5];
+        for(int i = 0; i < 5; i++) {
+            next5Days[i] = new WeatherData(totalPrecipitation[i]/24, totalTemp[i]/24, totalWindSpeed[i]/24);
+        }
+        return next5Days;
+    }
     public static void updatePeriods(String latitude, String longitude) {
         try {
             String apiUrl = "https://api.weather.gov/points/" + latitude + "," + longitude;
@@ -51,7 +75,7 @@ public class WeeklyWeatherForecast {
         
     }
 
-    public static WeatherData getOneDataPoint(int hourOffset, String latitude, String longitude) {
+    public static WeatherData getOneDataPoint(int hourOffset) {
         try {
             // Step 1: Get the base weather API URL
             
