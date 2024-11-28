@@ -133,6 +133,10 @@ public class ColorSettingsGUI extends GUI {
                 GUI.panel_color = new Color(255, 181, 61);
                 ColorButton.color = new Color(255, 212, 143);
             }
+            else{
+                GUI.panel_color = Color.white;
+                ColorButton.color = Color.white;
+            }
             System.out.println("Color settings saved: " + selectedColor);
             frame.remove(panel);
             ColorSettings.toUserSettings();

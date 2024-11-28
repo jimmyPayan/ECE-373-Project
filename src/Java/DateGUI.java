@@ -12,13 +12,14 @@ public class DateGUI extends GUI {
         this.panel = panel;
 
         // Define buttons
-        JButton[] buttons = new JButton[1];
-        buttons[0] = new JButton("Finish");
+        JButton[] buttons = new JButton[2];
+        buttons[0] = new JButton("Submit");
+        buttons[1] = new JButton("Back");
         this.buttons = buttons;
 
         // Define labels
         JLabel[] labels = new JLabel[2];
-        labels[0] = new JLabel("Forecast days ahead (max 6):");
+        labels[0] = new JLabel("Forecast days from now:");
         labels[1] = new JLabel("Current Time (24hr, HH:MM):");
 
         // Set label styles
@@ -36,7 +37,7 @@ public class DateGUI extends GUI {
         // Define input fields for days and time
         JTextField daysForward = new JTextField();
         daysForward.setPreferredSize(new Dimension(200, 30));
-        daysForward.setToolTipText("Enter a number from 0 to 6");
+        daysForward.setToolTipText("Enter a number from 0 to 6 (default 0)");
 
         JTextField timeHour = new JTextField();
         timeHour.setPreferredSize(new Dimension(200, 30));
@@ -47,6 +48,11 @@ public class DateGUI extends GUI {
         buttons[0].setBackground(new Color(173, 216, 230)); // Light blue background
         buttons[0].setBorder(BorderFactory.createLineBorder(new Color(100, 149, 237))); // Blue border
         buttons[0].setFocusPainted(false);
+
+        buttons[1].setFont(new Font("SansSerif", Font.PLAIN, 16));
+        buttons[1].setBackground(new Color(173, 216, 230)); // Light blue background
+        buttons[1].setBorder(BorderFactory.createLineBorder(new Color(100, 149, 237))); // Blue border
+        buttons[1].setFocusPainted(false);
 
         // Set up layout with constraints
         GridBagConstraints gbc = new GridBagConstraints();
@@ -71,9 +77,16 @@ public class DateGUI extends GUI {
         gbc.gridy = 4;
         panel.add(buttons[0], gbc);
 
+        gbc.gridy = 5;
+        panel.add(buttons[1],gbc);
+
         // Add button listener
         buttons[0].addActionListener(e -> {
             processData(daysForward.getText().trim(), timeHour.getText().trim());
+        });
+        buttons[1].addActionListener(e -> {
+            frame.remove(panel);
+            new MainMenu();
         });
 
         // Customize panel appearance
@@ -94,9 +107,11 @@ public class DateGUI extends GUI {
         } else if (!daysMatcher.matches()) {
             JOptionPane.showMessageDialog(panel, "Invalid number of days. Enter a number between 0 and 6.", "Input Error", JOptionPane.ERROR_MESSAGE);
             return -1;
+        } else{
+            days = daysMatcher.group(1);
         }
 
-        days = daysMatcher.group(1);
+        
 
         // Validate time input
         Pattern timePattern = Pattern.compile("(?<!\\s)([0-9]{2}):([0-9]{2})");
