@@ -42,5 +42,8 @@ public class Login {
         System.out.println("Going to main menu");
         MainMenu mainMenu = new MainMenu();
     }
+    public static void createAccount(String user, String pass) {
+        database.addEntry(user, pass);
+    }
     
 }

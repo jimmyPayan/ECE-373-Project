@@ -11,7 +11,6 @@ public class LoginGUI extends GUI {
     private JTextField usernameInput = new JTextField();
     private JPasswordField passwordInput = new JPasswordField();
 
-
     public LoginGUI() {
         super(null, null, null);
         JPanel panel = new JPanel();
@@ -24,12 +23,12 @@ public class LoginGUI extends GUI {
         labels[0] = new JLabel("Log in as Returning User");
         labels[1] = new JLabel("Continue as Guest");
         labels[2] = new JLabel("Return to Main Menu");
-        
+
         this.panel = panel;
         this.buttons = buttons;
         this.labels = labels;
     }
-    
+
     public void placeOnPanel() {
         panel.removeAll();
         panel.setLayout(new GridBagLayout());
@@ -61,6 +60,13 @@ public class LoginGUI extends GUI {
             gbc.gridx = 0;
         }
 
+        // Add "Create Account" button with ColorButton styling
+        gbc.gridy++;
+        gbc.gridx = 0;
+        gbc.gridwidth = 2; // Span the button across two columns
+        ColorButton createAccountButton = new ColorButton("Create Account");
+        panel.add(createAccountButton, gbc);
+
         // Button actions
         buttons[0].addActionListener(e -> {
             System.out.println("Login attempt");
@@ -87,9 +93,26 @@ public class LoginGUI extends GUI {
             Login.goToMain();
         });
 
+        // Create Account button action
+        createAccountButton.addActionListener(e -> {
+            String username = usernameInput.getText();
+            String password = new String(passwordInput.getPassword());
+            if (!username.isEmpty() && !password.isEmpty()) {
+                Login.createAccount(username, password);
+                JOptionPane.showMessageDialog(panel,
+                        "Account created successfully!",
+                        "Success",
+                        JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(panel,
+                        "Username and password cannot be empty.",
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
         this.panel.setBackground(new Color(245, 245, 245)); // Light gray background
     }
-
 
     public static void main(String[] args) {
         LoginGUI gui = new LoginGUI();

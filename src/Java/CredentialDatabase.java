@@ -14,8 +14,10 @@ public class CredentialDatabase {
     }
     public void addEntry(String name, String password) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(databaseFile, true))) {
-            writer.write(name + " " + password);
-            writer.newLine();
+            if(!inDatabase(name, Encryptor.encrypt(password, 1))) {
+                writer.write(name + " " + Encryptor.encrypt(password, 1));
+                writer.newLine();
+            }
         } catch (IOException e) {
             System.out.println("Error writing to file: " + e.getMessage());
         }
