@@ -1,3 +1,7 @@
 man kp
 jo kp
 asd asd
+man mo
+man mo
+man np
+man qpf
